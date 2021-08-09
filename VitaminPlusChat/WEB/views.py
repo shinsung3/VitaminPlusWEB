@@ -7,7 +7,7 @@ from django.shortcuts import redirect, render
 
 
 def index_home(request):
-    return render(request, 'frontend/index.html')
+    return render(request, 'frontend/home.html')
 
 def keyword(request):
     return render(request, 'keyword/keyword.html')
