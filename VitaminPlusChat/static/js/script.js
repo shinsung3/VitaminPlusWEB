@@ -4,10 +4,10 @@ $(function(){
         var gnbindex = $('.gnb > li > a').index($(this));
         $('.gnb .inner').removeClass('on');
         $('.gnb .inner:eq('+ gnbindex +')').addClass('on');   
-     });   
+     });
      $('header').on('mouseleave', function(){
          $('.gnb .inner').removeClass('on');
-     });     
+     });
 });
 
 //fixHeader
@@ -47,8 +47,7 @@ $(function(){
         pauseOnFocus:false
     });
     $('.slick-prev').text("prev");
-    
-    
+
     //두번째 슬라이드
     $('.slide2').slick({
         arrows:false,//화살표
@@ -61,10 +60,10 @@ $(function(){
         pauseOnHover:true, //호버시 멈추는 멈추도록 설정함
         pauseOnFocus:true
     });
-    $(".slide2 #slick-slide-control10").text("서울 마곡지구 업무용지");
-    $(".slide2 #slick-slide-control11").text("서울 마곡지구 대방디엠시티2차");
-    $(".slide2 #slick-slide-control12").text("화성동탄1차 대방디엠시티 더 센텀");
-    $(".slide2 #slick-slide-control13").text("광주 수완 대방노블랜드6차");
+    $(".slide2 #slick-slide-control10").text("TIMELINE");
+    $(".slide2 #slick-slide-control11").text("KEYWORD_ANALYTICS");
+    $(".slide2 #slick-slide-control12").text("EMOTION_ANALYTICS");
+    $(".slide2 #slick-slide-control13").text("BIG-DATA");
 });
 
 //스크롤애니메이션(scrolla.js)
@@ -72,8 +71,8 @@ $(function() {
 	$('.animate').scrolla({
 		mobile: true, //모바일버전시 활성화
 		once: false //스크롤시 딱 한번만 하고싶을땐 true
-	});    
-}); 
+	});
+});
 
 //스크롤다운
 $(function(){
