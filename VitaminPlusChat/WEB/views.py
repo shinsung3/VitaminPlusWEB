@@ -8,8 +8,26 @@ from .models import ChatData
 
 def index_home(request):
     chatData = ChatData.objects.filter()
-    print(chatData)
-    return render(request, 'frontend/home.html', {'chat': chatData})
+    keys = []
+    for i in range(121):
+        keys.append(str(i))
+    # print(keys)
+
+    timeLine = dict.fromkeys(keys, 0)
+    for i in chatData:
+        liveTime = i.liveTime.split(":")
+        if len(liveTime) >2:
+            key = str(int(liveTime[0])*60 + int(liveTime[1]))
+            value = timeLine.get(key)+1
+            timeLine.update({key : value})
+        else:
+            value = timeLine.get(liveTime[0])+1
+            key = liveTime[0]
+            timeLine.update({key : value})
+    # print(timeLine)
+    timeLine = sorted(timeLine.items())
+
+    return render(request, 'frontend/home.html', {'chat': chatData, 'timeLine':timeLine})
 
 def keyword(request):
     return render(request, 'keyword/keyword.html')
