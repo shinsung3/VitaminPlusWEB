@@ -10,3 +10,4 @@ VitaminPlus - 채팅 분석 WEB
 
     
 
+pip install django-import-export
