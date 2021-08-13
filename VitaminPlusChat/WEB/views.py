@@ -32,6 +32,9 @@ def index_home(request):
 def keyword(request):
     return render(request, 'keyword/keyword.html')
 
+def emotion(request):
+    return render(request, 'frontend/emotion.html')
+
 def timeline(request):
     chatData = ChatData.objects.filter()
     chat = []
@@ -47,14 +50,14 @@ def timeline(request):
             key = str(int(liveTime[0])*60 + int(liveTime[1]))
             value = timeLine.get(key)+1
             timeLine.update({key : value})
-            chat.append(key)
+            # chat.append(key)
             chat.append(i.liveTime)
             chat.append(i.chat)
         else:
             value = timeLine.get(liveTime[0])+1
             key = liveTime[0]
             timeLine.update({key : value})
-            chat.append(key)
+            # chat.append(key)
             chat.append(i.liveTime)
             chat.append(i.chat)
     # print(timeLine)

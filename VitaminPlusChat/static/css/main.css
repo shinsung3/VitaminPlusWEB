@@ -134,12 +134,11 @@ header.on .gnb ul.inner.on {top: 60px;}
 .contents .line.c{left: 75%;}
 
 /*information*/
-
-/*information*/
-.contents .information .scrollBox{width: 1200px; margin: 0 auto; position: relative; }
-.contents .information .scrollBox .scroll {display: block; width: 350px; height: 50px;background: #4395e0; padding-left: 25px; box-sizing: border-box; color: white; font-size: 20px; letter-spacing: 2px; position: relative; line-height: 60px;}
-.contents .information .scrollBox .scroll span {width: 60px;height: 60px; position: absolute;right: 0;top:0; animation: scroll linear 0.8s 0s infinite;}
-.contents .information .scrollBox .scroll span img {width: 100%;}
+.contents2{position: relative; background:#FFD85B; }
+.contents2 .information .scrollBox{width: 1200px; margin: 0 auto; position: relative; }
+.contents2 .information .scrollBox .scroll {display: block; width: 350px; height: 60px; padding-left: 25px; box-sizing: border-box; color: #666; font-size: 20px; letter-spacing: 2px; position: relative; line-height: 60px;}
+.contents2 .information .scrollBox .scroll span {width: 60px;height: 60px; position: absolute;right: 0;top:0; animation: scroll linear 0.8s 0s infinite;}
+.contents2 .information .scrollBox .scroll span img {width: 100%;}
 @keyframes scroll {
     0%{top: 0;}
     50%{top: 7px;}
@@ -255,15 +254,36 @@ header.on .gnb ul.inner.on {top: 60px;}
 .contents .video2.motion {transition: all 1s;}
 .contents .video2 .inner:after {display: none;}
 .contents .video2 .inner {overflow: hidden;}
-.contents .video2 .inner .title {margin-top: 70px; color: #666; float: left;}
-.contents .video2 .inner .title .en {color:#666; font-size: 28px; letter-spacing: 8px;}
+.contents .video2 .inner .title {margin-top: 70px; color: #fff; float: left;}
+.contents .video2 .inner .title .en {color:#fff; font-size: 28px; letter-spacing: 8px;}
 .contents .video2 .inner .title p {font-size: 54px; font-weight: bold;}
 .contents .video2 .inner .videoBox {float: right; position:relative; width: 800px; height: 500px;}
 .contents .video2 .inner .videoBox iframe {position: absolute; display: none;}
 .contents .video2 .inner .videoBox .mask {width: 100%; height: 100%; position: absolute; }
 .contents .video2 .inner .videoBox .mask span {display: block; width: 100%;height: 100%; position: relative;}
 .contents .video2 .inner .videoBox .mask span img{width: 100%; transition: all 1s;}
-.contents .video2 .inner .more {color: #666; bottom: 80px;}
+.contents .video2 .inner .more {color: #fff; bottom: 80px;}
+
+/*timeline-data*/
+.contents .video3{height: 500px;padding: 50px 0;box-sizing: border-box; background-color: #666; color: whitesmoke; position:relative;}
+.contents .video3.motion {transition: all 1s;}
+.contents .video3 .inner:after {display: none;}
+.contents .video3 .inner {overflow: hidden;}
+.contents .video3 .inner .title {margin-top: 30px; color: #666; float: right;}
+.contents .video3 .inner .title .en {color:#666; font-size: 28px; letter-spacing: 8px;}
+.contents .video3 .inner .title p {font-size: 54px; font-weight: bold;}
+.contents .video3 .inner .videoBox {float: right; position:relative; width: 800px; height: 300px;}
+.contents .video3 .inner .videoBox iframe {position: absolute; display: none;}
+.contents .video3 .inner .videoBox .mask {width: 100%; height: 100%; position: absolute; }
+.contents .video3 .inner .videoBox .mask span {display: block; width: 100%;height: 100%; position: relative;}
+.contents .video3 .inner .videoBox .mask span img{width: 100%; transition: all 1s;}
+
+/*공통된 타이틀*/
+.contents .title2 {color:whitesmoke; }
+.contents .title2 .en{font-size: 62px; letter-spacing: 10px; color:whitesmoke; line-height: 1.1;}
+.contents .title2 p{font-size: 24px; margin-top: 15px;}
+
+.contents .video3 .inner .more {color: #666; bottom: 80px;}
 
 
 /*비디오 호버효과*/
@@ -319,7 +339,7 @@ header.on .gnb ul.inner.on {top: 60px;}
 }
 
 /*news*/
-.contents .news {position: relative; padding: 380px 0 220px; background: url(../img/news.png)no-repeat right bottom;}
+.contents .news {position: relative; padding: 380px 0 220px; background: url(../img/1.jpg)no-repeat right bottom;}
 .contents .news .inner {position: absolute; top:0; left: 25%; padding: 150px 0 100px; width: 476px;}
 .contents .news .inner:after {display: none;}
 .contents .news .symbol {position: absolute; left: 10%; top:200px; width: 200px;}
@@ -327,8 +347,8 @@ header.on .gnb ul.inner.on {top: 60px;}
 .contents .news .newsList {width: 50%; margin:auto;}
 .contents .news .newsList li {margin-bottom: 20px; position: relative;}
 .contents .news .newsList li a{display: block; width: 100%;height: 100%; background: #f6f6f6; padding: 30px 40px; box-sizing: border-box; position: relative; transition: all 0.3s;}
-.contents .news .newsList li a .category {display: block;width: 100%;background: #rgb(245, 132, 132); float:left;width: 60px;height: 60px;text-align: center; padding-top: 5px; box-sizing: border-box;font-size: 16px; color:#fff; margin-right: 50px;}
-.contents .news .newsList li:first-child a .category {background: #19293d;}
+.contents .news .newsList li a .category {display: block;width: 100%;background: rgb(245, 132, 132); float:left;width: 60px;height: 60px;text-align: center; padding-top: 5px; box-sizing: border-box;font-size: 16px; color:#fff; margin-right: 50px;}
+.contents .news .newsList li:first-child a .category {background: rgb(245, 132, 132);}
 .contents .news .newsList li a .subject {display: block; font-size: 20px; font-weight: bold; color:#333;}
 .contents .news .newsList li a .date {font-size:18px; color:#999; font-weight: normal; margin:20px; display: block;}
 /* .contents .news .newsList li a .desc {margin-left: 110px; display: block; text-align: justify; font-size: } */

@@ -1,0 +1,48 @@
+{% extends 'frontend/base.html' %}
+{% block content %}
+{% load static %}
+<section class="contents">
+    <!-- <div class="video2 animate" data-animate = "motion">
+        <div class="inner">
+            <div class="title  animate" data-animate = "motion">
+                <div data-splitting class="en">H-NUNE EMOTION</div>
+                <P>키워드 감정 분석</P>
+            </div>
+            <a href="#" class="more en">FIND OUT MORE</a>
+            <div class="videoBox">
+                <a href="#" class="scroll en" id="chatScroll"> <span><p class="mask"><span><div id="chartdiv2"></div></span></p></span></a>
+            </div>
+        </div>
+    </div> -->
+    <div class="news">
+        <div class="inner animate" data-animate = "motion">
+            <div class="title">
+                <div data-splitting class="en">H-NUNE</div>
+                <div data-splitting class="en" style="color:rgb(245, 132, 132);">EMOTION</div>
+                <div data-splitting class="en">ANALYTICS</div>
+            </div>
+        </div>
+        <p class="symbol animate" data-animate = "motion"><img src="{% static 'img/black.png' %}" alt=""></p>
+        <ul class="newsList">
+            <li><a href="#">
+                <span class="category">긍정 <br>단어</span>
+                <span class="subject"></span>
+                <span class="date en">LIVE: 2021.01.20</span>
+                <span class="desc"></span>
+            </a></li>
+            <li><a href="#">
+                <span class="category">부정 <br>단어</span>
+                <span class="subject"></span>
+                <span class="date en">LIVE:2020.01.02</span>
+                <span class="desc"></span>
+            </a></li>
+            <li><a href="#">
+                <span class="category">HOT <br>키워드</span>
+                <span class="subject"></span>
+                <span class="date en">LIVE:2019.12.23</span>
+                <span class="desc"></span>
+            </a></li>
+        </ul>
+    </div>
+</section>
+{% endblock %}

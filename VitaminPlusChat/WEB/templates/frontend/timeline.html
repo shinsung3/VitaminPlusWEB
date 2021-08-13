@@ -12,54 +12,32 @@
             </div>
             <a href="#" class="more en">FIND OUT MORE</a>
             <div class="videoBox">
-                <p class="mask"><span><div id="chartdiv2"></div></span></p>
+                <a href="#" class="scroll en" id="chatScroll"> <span><p class="mask"><span><div id="chartdiv2"></div></span></p></span></a>
             </div>
         </div>
     </div>
-    <section class="contents">
+    <section class="contents2">
         <div class="information">
             <div class="scrollBox" id="scroll">
-                <a href="#" class="scroll en" id="chatScroll">SCROLL DOWN <span><img src="{% static 'img/scrolldown.png' %}" alt=""></span></a>
+                <a href="#" class="scroll en" id="chatScroll">TIMELINE DATA ANALYTICS<span>
+                    <!-- <img src="{% static 'img/scrolldown.png' %}" alt=""> -->
+                </span></a>
             </div>
         </div>
     </section>
-    <div id="chatData">
-    </div>
-    <!-- <div class="news">
-        <div class="inner animate" data-animate = "motion">
-            <div class="title">
-                <div data-splitting class="en">H-NUNE</div>
-                <div data-splitting class="en">TIMELINE</div>
-            </div>
-        </div>
-        <p class="symbol animate" data-animate = "motion"><img src="{% static 'img/로고1_파스텔.png' %}" alt=""></p>
-        <ul class="newsList">
-            <li><a href="#">
-                <span class="category">공지 <br>사항</span>
-                <span class="subject">새해 복 많이 받으세요!</span>
-                <span class="date en">2020.01.20</span>
-                <span class="desc"></span>
-            </a></li>
-            <li><a href="#">
-                <span class="category">대산 <br>소식</span>
-                <span class="subject">마곡 신사옥에서 2020년 첫 시무식</span>
-                <span class="date en">2020.01.02</span>
-                <span class="desc">마곡 신사옥에서 2020년 첫 시무식
-                    당사는 서울 강서구 마곡 신사옥에서 2일 오전 11시 시무식을 열고 2020년을 맞았습니다!이날 시무식에는 본사 임직원들이 8층 대회의실에서 새로운 한해를 시작...</span>
-            </a></li>
-            <li><a href="#">
-                <span class="category">대산 <br>소식</span>
-                <span class="subject">대방산업개발 CF</span>
-                <span class="date en">2019.12.23</span>
-                <span class="desc">대방산업개발 CF</span>
-            </a></li>
-        </ul>
-    </div> -->
-</section>
+    <section class="contents">
+        <span id="chatData"></span>
+    </section>
+
+    <div id="chartdiv3"></div>
 <style>
     #chartdiv2 {
       width: 90%;
       height: 500px;
+    }
+    #chartdiv3 {
+      width: 100%;
+      height: 600px;
     }
 </style>
 <!-- Resources -->
@@ -67,16 +45,43 @@
 <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 
+<script src="https://cdn.amcharts.com/lib/4/plugins/timeline.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/plugins/bullets.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/moonrisekingdom.js"></script>
+
 <!-- Chart code -->
 <script>
   // timeLine Data
-  var data = document.getElementById("timeLine").value;
-  var chat = document.getElementById("chat").value;
-  console.log(chat);
-  for(var i =0; i<chat.length; i++){
-      console.log(chat[i].chat);
-  }
-  timeLineArr = new Map();
+    var data = document.getElementById("timeLine").value;
+    var chat = document.getElementById("chat").value;
+
+    timeLineArr = new Map();
+    var liveTime = [];
+    var chatData = [];
+    var categoryTime = [];
+    var index = 0;
+    var chat2 = chat.split(",");
+    // console.log(chat2);
+    for(var i=0; i<chat2.length; i+=2){
+        // console.log("1 : ",chat2[i].split("'")[1]);
+        // console.log("2 : ",chat2[i+1].split("'")[1]);
+        // console.log("3 : ",chat2[i+2].split("'")[1]);
+        if(chat2[i] != undefined &&chat2[i].length>2 && chat2[i].includes(":")){
+            liveTime[index] = chat2[i].split("'")[1];
+            if(chat2[i].split(":").length>2){
+                categoryTime[index] = Number(chat2[i].split(":")[0].split("'")[1])*60 + Number(chat2[i].split(":")[1]);
+            }else{
+                categoryTime[index] = Number(chat2[i].split(":")[0].split("'")[1]);
+            }
+            if(chat2[i+1] != undefined &&chat2[i+1].length>2 && chat2[i+1].includes("'")){
+                chatData[index] = chat2[i+1].split("'")[1];
+            }
+            index+=1;
+        }
+    }
+    // console.log(categoryTime);
+    // console.log(liveTime);
+    // console.log(chatData);
   for (var i=0; i<120; i++){
     timeLineArr.set(i)
   }
@@ -103,7 +108,6 @@ for(var j=0; j<76; j++){
   for(var i =0; i<data.length; i++){
     if(data[i].includes("(")){
       key = data[i].split("'")[1];
-      // console.log(key);
     }
     if(key==j){
       if(data[i].includes(")")){
@@ -203,7 +207,7 @@ chart.colors.list = [
 ];
 // console.log(typeof(chart.colors.list))
 // console.log(dataObject);
-// console.log(dataArray);
+// console.log(dataArray[0].country);
 
 chart.data = dataArray;
 
@@ -213,6 +217,7 @@ categoryAxis.renderer.grid.template.location = 0;
 categoryAxis.dataFields.category = "country";
 categoryAxis.renderer.minGridDistance = 40;
 categoryAxis.fontSize = 11;
+console.log(categoryAxis.dataFields.category.tooltipText);
 
 var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 valueAxis.title.text = "채팅 수";
@@ -261,11 +266,44 @@ series.columns.template.tooltipText = "채팅 데이터 : {valueY.value}";
 series.columns.template.tooltipY = 0;
 series.columns.template.strokeOpacity = 0;
 
-var innerHtml = "";
+
+// 클릭시 채팅 데이터 노출
 series.columns.template.events.on("hit", function(ev) {
-    innerHtml += "<div>"
-    // for(var i=0; i<)
-    innerHtml += "</div>"
+    var innerHtml = "";
+    innerHtml += '<div class="video3 animate" data-animate = "motion">';
+    innerHtml += '<div class="inner">';
+    innerHtml += '<div class="videoBox">';
+    innerHtml += '<p class="mask">';
+    innerHtml += '<span>';
+    var indexValue = 0;
+    for(var i=0; i<dataArray.length; i++){
+        // innerHtml += chatData[i];
+        indexValue = Math.random()*100;
+        // console.log(indexValue);
+        if(indexValue<76){
+            break;
+        }
+    }
+    for(var j=0; j<categoryTime.length; j++){
+    // innerHtml += categoryTime[j];
+    // innerHtml += "<br/>";
+        if(parseInt(indexValue)==Number(categoryTime[j])){
+            innerHtml += liveTime[j];
+            innerHtml += " &nbsp&nbsp&nbsp";
+            innerHtml += chatData[j];
+            innerHtml += "<br/>";
+        }
+    }
+    innerHtml += '</span>';
+    innerHtml += '</P>';
+    innerHtml += '</div>';
+    innerHtml += '<div class="title2  animate" data-animate = "motion">';
+    innerHtml += '<div data-splitting class="en">RealTime</div>';
+    innerHtml += '<P>Chat Data</P>';
+    innerHtml += '</div>';
+    innerHtml += '</div>';
+    innerHtml += '</div>';
+
     document.getElementById("chatData").innerHTML = innerHtml;
 }, this);
 
@@ -275,5 +313,230 @@ series.columns.template.adapter.add("fill", function(fill, target) {
 });
 // console.log(dataColorArray);
 }); // end am4core.ready()
+</script>
+<!-- Chart code -->
+<script>
+    am4core.ready(function() {
+
+    // Themes begin
+    am4core.useTheme(am4themes_moonrisekingdom);
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+
+    var chart = am4core.create("chartdiv3", am4plugins_timeline.SerpentineChart);
+    chart.curveContainer.padding(100, 20, 50, 20);
+    chart.levelCount = 3;
+    chart.yAxisRadius = am4core.percent(20);
+    chart.yAxisInnerRadius = am4core.percent(2);
+    chart.maskBullets = false;
+
+    var colorSet = new am4core.ColorSet();
+
+    chart.dateFormatter.inputDateFormat = "yyyy-MM-dd HH:mm";
+    chart.dateFormatter.dateFormat = "HH";
+
+    chart.data = [{
+        "category": "",
+        "start": "2019-01-10 06:00",
+        "end": "2019-01-10 07:00",
+        "color": colorSet.getIndex(15),
+        "text": "I will have\na healthy day today!",
+        "textDisabled": false,
+        "icon": "VitaminPlusChat\static\img\white.png"
+    }, {
+        "category": "",
+        "start": "2019-01-10 07:00",
+        "end": "2019-01-10 08:00",
+        "color": colorSet.getIndex(14),
+        // "icon": "/wp-content/uploads/assets/timeline/timeline1.svg"
+    },
+    {
+        "category": "",
+        "start": "2019-01-10 08:00",
+        "end": "2019-01-10 09:00",
+        "color": colorSet.getIndex(13),
+        // "icon": "/wp-content/uploads/assets/timeline/timeline2.svg"
+    },
+    {
+        "category": "",
+        "start": "2019-01-10 09:00",
+        "end": "2019-01-10 10:00",
+        "color": colorSet.getIndex(12),
+        // "icon": "/wp-content/uploads/assets/timeline/timeline2.svg"
+    },
+    {
+        "category": "",
+        "start": "2019-01-10 10:00",
+        "end": "2019-01-10 12:00",
+        "color": colorSet.getIndex(11),
+        // "icon": "/wp-content/uploads/assets/timeline/timeline2.svg"
+    },
+    {
+        "category": "",
+        "start": "2019-01-10 12:00",
+        "end": "2019-01-10 13:00",
+        "color": colorSet.getIndex(10),
+        // "icon": "/wp-content/uploads/assets/timeline/timeline1.svg"
+    },
+    {
+        "category": "",
+        "start": "2019-01-10 13:00",
+        "end": "2019-01-10 14:00",
+        "color": colorSet.getIndex(9),
+        "text": "One beer doesn't count.",
+        "textDisabled": false,
+        // "icon": "/wp-content/uploads/assets/timeline/timeline3.svg"
+    },
+    {
+        "category": "",
+        "start": "2019-01-10 14:00",
+        "end": "2019-01-10 16:00",
+        "color": colorSet.getIndex(8),
+        // "icon": "/wp-content/uploads/assets/timeline/timeline2.svg"
+    },
+    {
+        "category": "",
+        "start": "2019-01-10 16:00",
+        "end": "2019-01-10 17:00",
+        "color": colorSet.getIndex(7),
+        // "icon": "/wp-content/uploads/assets/timeline/timeline4.svg"
+    },
+    {
+        "category": "",
+        "start": "2019-01-10 17:00",
+        "end": "2019-01-10 20:00",
+        "color": colorSet.getIndex(6),
+        // "icon": "/wp-content/uploads/assets/timeline/timeline2.svg"
+    },
+    {
+        "category": "",
+        "start": "2019-01-10 20:00",
+        "end": "2019-01-10 20:30",
+        "color": colorSet.getIndex(5),
+        // "icon": "/wp-content/uploads/assets/timeline/timeline3.svg"
+    },
+    {
+        "category": "",
+        "start": "2019-01-10 20:30",
+        "end": "2019-01-10 21:30",
+        "color": colorSet.getIndex(4),
+        // "icon": "/wp-content/uploads/assets/timeline/timeline3.svg"
+    },
+    {
+        "category": "",
+        "start": "2019-01-10 21:30",
+        "end": "2019-01-10 22:00",
+        "color": colorSet.getIndex(3),
+        // "icon": "/wp-content/uploads/assets/timeline/dance.svg"
+    },
+    {
+        "category": "",
+        "start": "2019-01-10 22:00",
+        "end": "2019-01-10 23:00",
+        "color": colorSet.getIndex(2),
+        // "icon": "/wp-content/uploads/assets/timeline/timeline5.svg"
+    },
+    {
+        "category": "",
+        "start": "2019-01-10 23:00",
+        "end": "2019-01-11 00:00",
+        "color": colorSet.getIndex(1),
+        // "icon": "/wp-content/uploads/assets/timeline/timeline6.svg"
+    },
+    {
+        "category": "",
+        "start": "2019-01-11 00:00",
+        "end": "2019-01-11 01:00",
+        "color": colorSet.getIndex(0),
+        "text": "Damn...",
+        "textDisabled": false,
+        // "icon": "/wp-content/uploads/assets/timeline/timeline7.svg"
+    }];
+
+    chart.fontSize = 10;
+    chart.tooltipContainer.fontSize = 10;
+
+    var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+    categoryAxis.dataFields.category = "category";
+    categoryAxis.renderer.grid.template.disabled = true;
+    categoryAxis.renderer.labels.template.paddingRight = 25;
+    categoryAxis.renderer.minGridDistance = 10;
+
+    var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    dateAxis.renderer.minGridDistance = 70;
+    dateAxis.baseInterval = { count: 30, timeUnit: "minute" };
+    dateAxis.renderer.tooltipLocation = 0;
+    dateAxis.renderer.line.strokeDasharray = "1,4";
+    dateAxis.renderer.line.strokeOpacity = 0.5;
+    dateAxis.tooltip.background.fillOpacity = 0.2;
+    dateAxis.tooltip.background.cornerRadius = 5;
+    dateAxis.tooltip.label.fill = new am4core.InterfaceColorSet().getFor("alternativeBackground");
+    dateAxis.tooltip.label.paddingTop = 7;
+    dateAxis.endLocation = 0;
+    dateAxis.startLocation = -0.5;
+
+    var labelTemplate = dateAxis.renderer.labels.template;
+    labelTemplate.verticalCenter = "middle";
+    labelTemplate.fillOpacity = 0.4;
+    labelTemplate.background.fill = new am4core.InterfaceColorSet().getFor("background");
+    labelTemplate.background.fillOpacity = 1;
+    labelTemplate.padding(7, 7, 7, 7);
+
+    var series = chart.series.push(new am4plugins_timeline.CurveColumnSeries());
+    series.columns.template.height = am4core.percent(15);
+
+    series.dataFields.openDateX = "start";
+    series.dataFields.dateX = "end";
+    series.dataFields.categoryY = "category";
+    series.baseAxis = categoryAxis;
+    series.columns.template.propertyFields.fill = "color"; // get color from data
+    series.columns.template.propertyFields.stroke = "color";
+    series.columns.template.strokeOpacity = 0;
+    series.columns.template.fillOpacity = 0.6;
+
+    var imageBullet1 = series.bullets.push(new am4plugins_bullets.PinBullet());
+    imageBullet1.locationX = 1;
+    imageBullet1.propertyFields.stroke = "color";
+    imageBullet1.background.propertyFields.fill = "color";
+    imageBullet1.image = new am4core.Image();
+    imageBullet1.image.propertyFields.href = "icon";
+    imageBullet1.image.scale = 0.5;
+    imageBullet1.circle.radius = am4core.percent(100);
+    imageBullet1.dy = -5;
+
+    var textBullet = series.bullets.push(new am4charts.LabelBullet());
+    textBullet.label.propertyFields.text = "text";
+    textBullet.disabled = true;
+    textBullet.propertyFields.disabled = "textDisabled";
+    textBullet.label.strokeOpacity = 0;
+    textBullet.locationX = 1;
+    textBullet.dy = - 100;
+    textBullet.label.textAlign = "middle";
+    
+    chart.scrollbarX = new am4core.Scrollbar();
+    chart.scrollbarX.align = "center"
+    chart.scrollbarX.width = am4core.percent(75);
+    chart.scrollbarX.opacity = 0.5;
+    
+    var cursor = new am4plugins_timeline.CurveCursor();
+    chart.cursor = cursor;
+    cursor.xAxis = dateAxis;
+    cursor.yAxis = categoryAxis;
+    cursor.lineY.disabled = true;
+    cursor.lineX.strokeDasharray = "1,4";
+    cursor.lineX.strokeOpacity = 1;
+
+    dateAxis.renderer.tooltipLocation2 = 0;
+    categoryAxis.cursorTooltipEnabled = false;
+
+    var label = chart.createChild(am4core.Label);
+    label.text = "Monthly Handsome Live Commerce & Goods"
+    label.isMeasured = false;
+    label.y = am4core.percent(40);
+    label.x = am4core.percent(50);
+    label.horizontalCenter = "middle";
+    label.fontSize = 20;
+
+    }); // end am4core.ready()
 </script>
 {% endblock %}
