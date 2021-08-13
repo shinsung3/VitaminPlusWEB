@@ -1,63 +1,38 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
 {% load static %}
-<!--contents-->
-    <div class="video animate" data-animate = "motion">
+<section class="contents">
+    <input type="hidden" id="timeLine" name="timeLine" value="{{ timeLine }}">
+    <input type="hidden" id="chat" name="chat" value="{{ chat }}">
+    <div class="video2 animate" data-animate = "motion">
         <div class="inner">
             <div class="title  animate" data-animate = "motion">
-                <div data-splitting class="en">T</div>
-                <P>집에대한바른생각</P>
+                <div data-splitting class="en">HANDSOME TimeLINE</div>
+                <P>채팅타임라인</P>
             </div>
             <a href="#" class="more en">FIND OUT MORE</a>
             <div class="videoBox">
-                <iframe width="690" height="391" src="https://www.youtube.com/embed/xgO8wm-9fv0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <p class="mask"><span><img src="{% static 'img/video1.jpg' %}" alt=""></span></p>
+                <p class="mask"><span><div id="chartdiv2"></div></span></p>
             </div>
         </div>
     </div>
-    <!-- <div class="business">
-        <div class="inner animate" data-animate = "motion">
-            <div class="title">
-            <div data-splitting class="en">BUSINESS AREA</div>
-            <P>모든것을 누리는 프리미엄 생활, 대방에서<br>시작됩니다.</P>
+    <section class="contents">
+        <div class="information">
+            <div class="scrollBox" id="scroll">
+                <a href="#" class="scroll en" id="chatScroll">SCROLL DOWN <span><img src="{% static 'img/scrolldown.png' %}" alt=""></span></a>
             </div>
-            <a href="#" class="more en">FIND OUT MORE</a>
         </div>
-        <ul class="list">
-            <li class="animate" data-animate = "motion" ><a href="#">
-                <p class="img"><img src="img/business1.jpg" alt=""></p>
-                <div class="txt">
-                    <h3 class="en">HOUSING /<br><span>SALES BUSINESS</span></h3>
-                    <p>고품격 주거문화를 <br>창출하겠습니다</p>
-                    <i class="icon"></i>
-                </div>
-            </a></li>
-            <li class="animate" data-animate = "motion"><a href="#">
-                <p class="img"><img src="img/business2.jpg" alt=""></p>
-                <div class="txt">
-                    <h3 class="en">ORDER INTAKE<br><span>BUSINESS</span></h3>
-                    <p>시대에 맞튼 건축혁명을  <br>이끌어 갑니다.</p>
-                    <i class="icon"></i>
-                </div>
-            </a></li>
-            <li class="animate" data-animate = "motion"><a href="#">
-                <p class="img"><img src="img/business3.jpg" alt=""></p>
-                <div class="txt">
-                    <h3 class="en">DEVELOPMENT<br><span> BUSINESS</span></h3>
-                    <p>미래를 개발한다는 <br>사명감으로 임합니다.</p>
-                    <i class="icon"></i>
-                </div>
-            </a></li>
-        </ul>
+    </section>
+    <div id="chatData">
     </div>
     <div class="news">
         <div class="inner animate" data-animate = "motion">
             <div class="title">
-                <div data-splitting class="en">NEWS</div>
+                <div data-splitting class="en">H-NUNE</div>
+                <div data-splitting class="en">TIMELINE</div>
             </div>
-            <a href="#" class="more en">FIND OUT MORE</a>
         </div>
-        <p class="symbol animate" data-animate = "motion"><img src="img/news2.png" alt=""></p>
+        <p class="symbol animate" data-animate = "motion"><img src="{% static 'img/로고1_파스텔.png' %}" alt=""></p>
         <ul class="newsList">
             <li><a href="#">
                 <span class="category">공지 <br>사항</span>
@@ -80,31 +55,225 @@
             </a></li>
         </ul>
     </div>
-    <div class="career  animate" data-animate = "motion">
-        <div class="inner animate" data-animate = "motion">
-            <div class="title">
-                <div data-splitting class="en">CAREER</div>
-            <P>열정과 실천의지를 가지고 있는<br>인재를 기다립니다.</P>
-            </div>
-            <a href="#" class="more en">FIND OUT MORE</a>
-        </div>
-    </div>
-    <div class="customers animate" data-animate = "motion">
-        <div class="inner animate" data-animate = "motion">
-            <div class="left">
-                <div class="title">
-                    <div data-splitting class="en">CUSTOMERS</div>
-                <P>기대를 넘어선 품격을 경험해 보세요.</P>
-                </div>
-                <a href="#" class="more en">FIND OUT MORE</a>
-            </div>
-            <ul class="right">
-                <li><a href="#"><img src="img/icon1.png" alt="FAQ"></a></li>
-                <li><a href="#"><img src="img/icon2.png" alt="마감재"></a></li>
-                <li><a href="#"><img src="img/icon3.png" alt="관심단지등록"></a></li>
-                <li><a href="#"><img src="img/icon4.png" alt="1:1문의"></a></li>
-            </ul>
-        </div>
-    </div> -->
 </section>
+<style>
+    #chartdiv2 {
+      width: 90%;
+      height: 500px;
+    }
+</style>
+<!-- Resources -->
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+<!-- Chart code -->
+<script>
+  // timeLine Data
+  var data = document.getElementById("timeLine").value;
+  var chat = document.getElementById("chat").value;
+  console.log(chat);
+  for(var i =0; i<chat.length; i++){
+      console.log(chat[i].chat);
+  }
+  timeLineArr = new Map();
+  for (var i=0; i<120; i++){
+    timeLineArr.set(i)
+  }
+  data = data.split(",");
+  var key = "";
+  var value = "";
+  // document.getElementById("result").innerText = timeLineArr;
+  // console.log(data);
+//   console.log(timeLineArr);
+
+am4core.ready(function() {
+
+  // Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+var chart = am4core.create("chartdiv2", am4charts.XYChart);
+chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+var dataArray = [];
+var dataColorArray = [];
+
+for(var j=0; j<76; j++){
+  for(var i =0; i<data.length; i++){
+    if(data[i].includes("(")){
+      key = data[i].split("'")[1];
+      // console.log(key);
+    }
+    if(key==j){
+      if(data[i].includes(")")){
+        value = data[i].split(")")[0].trim();
+        timeLineArr.set(parseInt(key), value);
+        var dataObject = {};
+        dataObject.country = key;
+        dataObject.visits = value;
+        dataObject.color = "#4F7CAC";
+
+        dataArray.push(dataObject);
+        var colorObject = {};
+        colorObject.color = "#4F7CAC";
+        // console.log(colorObject);
+        dataColorArray.push(colorObject);
+      }
+    }
+  }
+}
+
+chart.colors.list = [
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+  am4core.color("#273C54"),
+];
+// console.log(typeof(chart.colors.list))
+// console.log(dataObject);
+// console.log(dataArray);
+
+chart.data = dataArray;
+
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.title.text = "Live Time (분)";
+categoryAxis.renderer.grid.template.location = 0;
+categoryAxis.dataFields.category = "country";
+categoryAxis.renderer.minGridDistance = 40;
+categoryAxis.fontSize = 11;
+
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+valueAxis.title.text = "채팅 수";
+valueAxis.min = 0;
+valueAxis.max = 50;
+valueAxis.strictMinMax = true;
+valueAxis.renderer.minGridDistance = 30;
+// axis break
+var axisBreak = valueAxis.axisBreaks.create();
+axisBreak.startValue = 2100;
+axisBreak.endValue = 22900;
+//axisBreak.breakSize = 0.005;
+
+// fixed axis break
+var d = (axisBreak.endValue - axisBreak.startValue) / (valueAxis.max - valueAxis.min);
+axisBreak.breakSize = 0.05 * (1 - d) / d; // 0.05 means that the break will take 5% of the total value axis height
+
+// make break expand on hover
+var hoverState = axisBreak.states.create("hover");
+hoverState.properties.breakSize = 1;
+hoverState.properties.opacity = 0.1;
+hoverState.transitionDuration = 1500;
+
+axisBreak.defaultState.transitionDuration = 1000;
+
+// this is exactly the same, but with events
+// axisBreak.events.on("over", function() {
+//   axisBreak.animate(
+//     [{ property: "breakSize", to: 1 }, { property: "opacity", to: 0.1 }],
+//     1500,
+//     am4core.ease.sinOut
+//   );
+// });
+// axisBreak.events.on("out", function() {
+//   axisBreak.animate(
+//     [{ property: "breakSize", to: 0.005 }, { property: "opacity", to: 1 }],
+//     1000,
+//     am4core.ease.quadOut
+//   );
+// });
+
+var series = chart.series.push(new am4charts.ColumnSeries());
+series.dataFields.categoryX = "country";
+series.dataFields.valueY = "visits";
+series.columns.template.tooltipText = "채팅 데이터 : {valueY.value}";
+series.columns.template.tooltipY = 0;
+series.columns.template.strokeOpacity = 0;
+
+var innerHtml = "";
+series.columns.template.events.on("hit", function(ev) {
+    innerHtml += "<div>"
+    // for(var i=0; i<)
+    innerHtml += "</div>"
+    document.getElementById("chatData").innerHTML = innerHtml;
+}, this);
+
+// as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
+series.columns.template.adapter.add("fill", function(fill, target) {
+  return chart.colors.getIndex(target.dataItem.index);
+});
+// console.log(dataColorArray);
+}); // end am4core.ready()
+</script>
 {% endblock %}

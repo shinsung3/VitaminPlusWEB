@@ -23,15 +23,16 @@
                 <img src="{% static 'img/english.png' %}" alt="로고2">
             </a></h1>
             <ul class="gnb">
-                <li><a href="#">Home</a>
+                <li><a href="/">Home</a>
                     <ul class="inner">
-                        <li><a href="#"><span>TimeLine</span></a></li>
+                        <li><a href="/"><span>Home</span></a></li>
                         <li><a href="#"><span>분석그래프</span></a></li>
                     </ul>
                 </li>
                 <li><a href="/">H-Nune</a>
                     <ul class="inner">
                         <li><a href="/keyword"><span>Keyword</span></a></li>
+                        <li><a href="/timeline"><span>TimeLine</span></a></li>
                         <li><a href="#"><span>감정분석</span></a></li>
                         <li><a href="#"><span>타임라인</span></a></li>
                     </ul>
@@ -46,38 +47,6 @@
             </ul>
         </div>
     </header>
-<!--visual -->
-    <section class="visual">
-        <ul class="slide">
-            <li>
-                <img src="{% static 'img/visual1.jpg' %}" alt="">
-                <div class="txt en">
-                    <div data-splitting>Chat analytics</div>
-                    <div data-splitting>- Vitamin Plus -</div>
-                </div>
-                <a href="#" class="en en1">FIND OUT MORE</a>
-                <span class="mask a"></span> <span class="mask b"></span> <span class="mask c"></span> <span class="mask d"></span>
-            </li>
-            <li>
-                <img src="{% static 'img/visual2.jpg' %}" alt="">
-                <div class="txt en">
-                    <div data-splitting>Chat analytics</div>
-                    <div data-splitting>- Vitamin Plus -</div>
-                </div>
-                <a href="#" class="en en1">FIND OUT MORE</a>
-                <span class="mask a"></span> <span class="mask b"></span> <span class="mask c"></span> <span class="mask d"></span>
-            </li>
-            <li>
-                <img src="{% static 'img/visual3.jpg' %}" alt="">
-                <div class="txt en">
-                    <div data-splitting>Chat analytics</div>
-                    <div data-splitting>- Vitamin Plus -</div>
-                </div>
-                <a href="#" class="en en1">FIND OUT MORE</a>
-                <span class="mask a"></span> <span class="mask b"></span> <span class="mask c"></span> <span class="mask d"></span>
-            </li>
-        </ul>
-    </section>
 {% block content %}
 {% endblock %}
     <!-- footer -->

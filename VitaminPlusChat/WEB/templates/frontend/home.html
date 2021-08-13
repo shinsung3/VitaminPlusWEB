@@ -1,6 +1,38 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
 {% load static %}
+<!--visual -->
+    <section class="visual">
+        <ul class="slide">
+            <li>
+                <img src="{% static 'img/visual1.jpg' %}" alt="">
+                <div class="txt en">
+                    <div data-splitting>Chat analytics</div>
+                    <div data-splitting>- Vitamin Plus -</div>
+                </div>
+                <a href="#" class="en en1">FIND OUT MORE</a>
+                <span class="mask a"></span> <span class="mask b"></span> <span class="mask c"></span> <span class="mask d"></span>
+            </li>
+            <li>
+                <img src="{% static 'img/visual2.jpg' %}" alt="">
+                <div class="txt en">
+                    <div data-splitting>Chat analytics</div>
+                    <div data-splitting>- Vitamin Plus -</div>
+                </div>
+                <a href="#" class="en en1">FIND OUT MORE</a>
+                <span class="mask a"></span> <span class="mask b"></span> <span class="mask c"></span> <span class="mask d"></span>
+            </li>
+            <li>
+                <img src="{% static 'img/visual3.jpg' %}" alt="">
+                <div class="txt en">
+                    <div data-splitting>Chat analytics</div>
+                    <div data-splitting>- Vitamin Plus -</div>
+                </div>
+                <a href="#" class="en en1">FIND OUT MORE</a>
+                <span class="mask a"></span> <span class="mask b"></span> <span class="mask c"></span> <span class="mask d"></span>
+            </li>
+        </ul>
+    </section>
 <!--contents-->
 <section class="contents">
     <span class="line a"></span><span class="line b"></span><span class="line c"></span>
@@ -283,12 +315,14 @@ console.log(typeof(chart.colors.list))
 
 chart.data = dataArray;
 var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.title.text = "Live Time";
 categoryAxis.renderer.grid.template.location = 0;
 categoryAxis.dataFields.category = "country";
 categoryAxis.renderer.minGridDistance = 40;
 categoryAxis.fontSize = 11;
 
 var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+valueAxis.title.text = "채팅 수";
 valueAxis.min = 0;
 valueAxis.max = 50;
 valueAxis.strictMinMax = true;
@@ -330,7 +364,7 @@ axisBreak.events.on("out", function() {
 var series = chart.series.push(new am4charts.ColumnSeries());
 series.dataFields.categoryX = "country";
 series.dataFields.valueY = "visits";
-series.columns.template.tooltipText = "{valueY.value}";
+series.columns.template.tooltipText = "채팅 데이터 : {valueY.value}";
 series.columns.template.tooltipY = 0;
 series.columns.template.strokeOpacity = 0;
 
