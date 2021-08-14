@@ -6,13 +6,13 @@ from wordcloud import ImageColorGenerator
 import matplotlib.pyplot as plt
 from PIL import Image
 import sys
-from konlpy import Okt
-from collections import Counter
+# from konlpy import Okt
+# from collections import Counter
 import warnings
 
 #엑셀 불러오기
 base_dir = 'VitaminPlusChat/static/excel'
-excel_file = 'excel.xlsx'
+excel_file = 'TommyJeans_2021_Test_data_2.xlsx'
 excel_dir = os.path.join(base_dir, excel_file)
 
 with warnings.catch_warnings(record=True):
@@ -23,7 +23,7 @@ with warnings.catch_warnings(record=True):
                                 dtype = {'second':str,
                                        'reg_dt':str,
                                        'message_type':str,
-                                       'message':str,
+                                       'chat':str,
                                        'user_cd':str,
                                        'user_group':str,
                                        'user_id':str,
@@ -38,19 +38,19 @@ with warnings.catch_warnings(record=True):
                                 engine="openpyxl")
 
 
-m_list = list(df_from_excel['이벤트 타입'])
+m_list = list(df_from_excel['chat'])
 text = " ".join(m_list)
 
-#명사 추출
-okt = Okt()
-noun = okt.nouns(text)
+# #명사 추출
+# okt = Okt()
+# noun = okt.nouns(text)
 
-for i,v in enumerate(noun):
-       if len(v) < 2:
-              noun.pop(i)
+# for i,v in enumerate(noun):
+#        if len(v) < 2:
+#               noun.pop(i)
 
-count = Counter(noun)
-noun_list = count.most_common(100)
+# count = Counter(noun)
+# noun_list = count.most_common(100)
 
 #wordcloud 그리기
 clothes_coloring = np.array(Image.open('VitaminPlusChat/static/img/clothes.png'))
@@ -58,10 +58,16 @@ image_colors = ImageColorGenerator(clothes_coloring)
 
 font_path = 'C:/Windows/Fonts/H2GTRM.ttf'
 #wordcloud = WordCloud(font_path=font_path, background_color='white').generate(text)
-wordcloud = WordCloud(font_path=font_path, background_color='white',max_font_size=100, mask=clothes_coloring)
-wordcloud.generate_from_frequencies(dict(noun_list))
+wordcloud = WordCloud(font_path=font_path, background_color='white',max_font_size=300, mask=clothes_coloring).generate(text)
+# wordcloud.generate_from_frequencies(dict(noun_list))
 wordcloud.recolor(color_func=image_colors)
 wordcloud.to_file('VitaminPlusChat/static/img/wordcloud.png')
+
+
+
+wordcloud = WordCloud(font_path=font_path, background_color='#FFD85B',max_font_size=300, mask=clothes_coloring).generate(text)
+wordcloud.recolor(color_func=image_colors)
+wordcloud.to_file('VitaminPlusChat/static/img/keyword.png')
 
 fig = plt.figure(figsize=(15,15))
 plt.imshow(wordcloud)

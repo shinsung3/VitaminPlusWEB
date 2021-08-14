@@ -1,13 +1,20 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
 {% load static %}
-    <!--visual -->
-        <section class="visual">
-            <ul class = "wordcloud">
-                <li>가장 많이 나온 단어</li>
-                <li>채팅에 많이 나올 수록 단어의 크기가 커집니다.</li>
-                <img src="{% static 'img/wordcloud.png' %}" alt="">
-                <p>단어 구름</p>
-            </ul>
-        </section>
+<section class="contents">
+    <input type="hidden" id="timeLine" name="timeLine" value="{{ timeLine }}">
+    <input type="hidden" id="chat" name="chat" value="{{ chat }}">
+    <div class="video1 animate" data-animate = "motion">
+        <div class="inner">
+            <div class="title  animate" data-animate = "motion">
+                <div data-splitting class="en">KoNLPy-keyword</div>
+                <P>키워드분석</P>
+            </div>
+            <a href="#" class="more en">FIND OUT MORE</a>
+            <div class="videoBox">
+                <img src="{% static 'img/keyword.png' %}" alt="" style="width: 750px;">
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
