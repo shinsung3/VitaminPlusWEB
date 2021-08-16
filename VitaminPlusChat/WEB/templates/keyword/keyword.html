@@ -1,6 +1,8 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/keyword.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <section class="contents">
     <input type="hidden" id="timeLine" name="timeLine" value="{{ timeLine }}">
     <input type="hidden" id="chat" name="chat" value="{{ chat }}">
@@ -10,11 +12,125 @@
                 <div data-splitting class="en">KoNLPy-keyword</div>
                 <P>키워드분석</P>
             </div>
-            <a href="#" class="more en">FIND OUT MORE</a>
-            <div class="videoBox">
-                <img src="{% static 'img/keyword.png' %}" alt="" style="width: 750px;">
+            <div class="videoBox" data-animate = "motion">
+                <li>
+                    <img src="{% static 'img/keyword_1.png' %}" alt="" style="width: 750px;">
+                </li>
+                <li>
+                    <img src="{% static 'img/keyword_2.png' %}" alt="" style="width: 750px;">
+                </li>
+                <li>
+                    <img src="{% static 'img/keyword_3.png' %}" alt="" style="width: 750px;">
+                </li>
             </div>
         </div>
     </div>
+    <section class="contents2" style="background:#666;">
+        <div class="information">
+            <div class="scrollBox" id="scroll">
+                <a href="#" class="scroll en" id="chatScroll" style="color: white;">MOST COMMON KEYWORDS<span>
+                    <!-- <img src="{% static 'img/scrolldown.png' %}" alt=""> -->
+                </span></a>
+            </div>
+        </div>
+    </section>
+    <section class="strips">
+        <article class="strips__strip">
+          <div class="strip__content">
+            <h1 class="strip__title" data-name="Lorem">풀</h1>
+            <div class="strip__inner-text">
+              <h2>Ettrics</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia sapiente deserunt consectetur, quod reiciendis corrupti quo ea aliquid! Repellendus numquam quo, voluptate. Suscipit soluta omnis quibusdam facilis, illo voluptates odit!</p>
+            </div>
+          </div>
+        </article>
+        <article class="strips__strip">
+          <div class="strip__content">
+            <h1 class="strip__title" data-name="Ipsum">꽃</h1>
+            <div class="strip__inner-text">
+              <h2>Ettrics</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia sapiente deserunt consectetur, quod reiciendis corrupti quo ea aliquid! Repellendus numquam quo, voluptate. Suscipit soluta omnis quibusdam facilis, illo voluptates odit!</p>
+            </div>
+          </div>
+        </article>
+        <article class="strips__strip">
+          <div class="strip__content">
+            <h1 class="strip__title" data-name="Dolor">의자</h1>
+            <div class="strip__inner-text">
+              <h2>Ettrics</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia sapiente deserunt consectetur, quod reiciendis corrupti quo ea aliquid! Repellendus numquam quo, voluptate. Suscipit soluta omnis quibusdam facilis, illo voluptates odit!</p>
+            </div>
+          </div>
+        </article>
+        <article class="strips__strip">
+          <div class="strip__content">
+            <h1 class="strip__title" data-name="Sit">파란색</h1>
+            <div class="strip__inner-text">
+              <h2>Ettrics</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia sapiente deserunt consectetur, quod reiciendis corrupti quo ea aliquid! Repellendus numquam quo, voluptate. Suscipit soluta omnis quibusdam facilis, illo voluptates odit!</p>
+            </div>
+          </div>
+        </article>
+        <article class="strips__strip">
+          <div class="strip__content">
+            <h1 class="strip__title" data-name="Amet">슬리피</h1>
+            <div class="strip__inner-text">
+              <h2>Ettrics</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia sapiente deserunt consectetur, quod reiciendis corrupti quo ea aliquid! Repellendus numquam quo, voluptate. Suscipit soluta omnis quibusdam facilis, illo voluptates odit!</p>
+            </div>
+          </div>
+        </article>
+        <i class="fa fa-close strip__close"></i>
+      </section>
 </section>
+<script>
+    var Expand = (function() {
+        var tile = $('.strips__strip');
+        var tileLink = $('.strips__strip > .strip__content');
+        var tileText = tileLink.find('.strip__inner-text');
+        var stripClose = $('.strip__close');
+        
+        var expanded  = false;
+        
+        var open = function() {
+            var tile = $(this).parent();
+            
+            if (!expanded) {
+                tile.addClass('strips__strip--expanded');
+                // add delay to inner text
+                tileText.css('transition', 'all .5s .3s cubic-bezier(0.23, 1, 0.32, 1)');
+                stripClose.addClass('strip__close--show');
+                stripClose.css('transition', 'all .6s 1s cubic-bezier(0.23, 1, 0.32, 1)');
+                expanded = true;
+            }
+        };
+        
+        var close = function() {
+            if (expanded) {
+                tile.removeClass('strips__strip--expanded');
+                
+                // remove delay from inner text
+                tileText.css('transition', 'all 0.15s 0 cubic-bezier(0.23, 1, 0.32, 1)');
+                stripClose.removeClass('strip__close--show');
+                stripClose.css('transition', 'all 0.2s 0s cubic-bezier(0.23, 1, 0.32, 1)')
+                expanded = false;
+            }
+        };
+        
+        var bindActions = function() {
+            tileLink.on('click', open);
+            stripClose.on('click', close);
+        };
+
+        var init = function() {
+            bindActions();
+        };
+        
+        return {
+            init: init
+        };
+    }());
+
+    Expand.init();
+</script>
 {% endblock %}
