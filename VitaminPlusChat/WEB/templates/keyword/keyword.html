@@ -4,8 +4,7 @@
 <link rel="stylesheet" href="{% static 'css/keyword.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <section class="contents">
-    <input type="hidden" id="timeLine" name="timeLine" value="{{ timeLine }}">
-    <input type="hidden" id="chat" name="chat" value="{{ chat }}">
+    <input type="hidden" id="word" name="word" value="{{ word }}">
     <div class="video1 animate" data-animate = "motion">
         <div class="inner">
             <div class="title  animate" data-animate = "motion">
@@ -28,7 +27,7 @@
     <section class="contents2" style="background:#666;">
         <div class="information">
             <div class="scrollBox" id="scroll">
-                <a href="#" class="scroll en" id="chatScroll" style="color: white;">MOST COMMON KEYWORDS<span>
+                <a href="#" class="scroll en" id="chatScroll" style="color:white">MOST COMMON KEYWORDS<span>
                     <!-- <img src="{% static 'img/scrolldown.png' %}" alt=""> -->
                 </span></a>
             </div>
@@ -37,7 +36,7 @@
     <section class="strips">
         <article class="strips__strip">
           <div class="strip__content">
-            <h1 class="strip__title" data-name="Lorem">풀</h1>
+            <h1 class="strip__title" id="word1"></h1>
             <div class="strip__inner-text">
               <h2>Ettrics</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia sapiente deserunt consectetur, quod reiciendis corrupti quo ea aliquid! Repellendus numquam quo, voluptate. Suscipit soluta omnis quibusdam facilis, illo voluptates odit!</p>
@@ -46,7 +45,7 @@
         </article>
         <article class="strips__strip">
           <div class="strip__content">
-            <h1 class="strip__title" data-name="Ipsum">꽃</h1>
+            <h1 class="strip__title" id="word2"></h1>
             <div class="strip__inner-text">
               <h2>Ettrics</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia sapiente deserunt consectetur, quod reiciendis corrupti quo ea aliquid! Repellendus numquam quo, voluptate. Suscipit soluta omnis quibusdam facilis, illo voluptates odit!</p>
@@ -55,7 +54,7 @@
         </article>
         <article class="strips__strip">
           <div class="strip__content">
-            <h1 class="strip__title" data-name="Dolor">의자</h1>
+            <h1 class="strip__title" id="word3"></h1>
             <div class="strip__inner-text">
               <h2>Ettrics</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia sapiente deserunt consectetur, quod reiciendis corrupti quo ea aliquid! Repellendus numquam quo, voluptate. Suscipit soluta omnis quibusdam facilis, illo voluptates odit!</p>
@@ -64,7 +63,7 @@
         </article>
         <article class="strips__strip">
           <div class="strip__content">
-            <h1 class="strip__title" data-name="Sit">파란색</h1>
+            <h1 class="strip__title" id="word4"></h1>
             <div class="strip__inner-text">
               <h2>Ettrics</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia sapiente deserunt consectetur, quod reiciendis corrupti quo ea aliquid! Repellendus numquam quo, voluptate. Suscipit soluta omnis quibusdam facilis, illo voluptates odit!</p>
@@ -73,7 +72,7 @@
         </article>
         <article class="strips__strip">
           <div class="strip__content">
-            <h1 class="strip__title" data-name="Amet">슬리피</h1>
+            <h1 class="strip__title" id="word5"></h1>
             <div class="strip__inner-text">
               <h2>Ettrics</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia sapiente deserunt consectetur, quod reiciendis corrupti quo ea aliquid! Repellendus numquam quo, voluptate. Suscipit soluta omnis quibusdam facilis, illo voluptates odit!</p>
@@ -132,5 +131,17 @@
     }());
 
     Expand.init();
+</script>
+<script>
+    var data = document.getElementById("word").value;
+    data = data.split(',');
+
+    for(var i=0;i<5;i++){
+        data[i] = data[i].replaceAll("'"," ")
+        data[i] = data[i].replaceAll("["," ")
+        data[i] = data[i].replaceAll("]"," ")
+        var text = document.getElementById("word"+[i+1]);
+        text.innerText = data[i]
+    }
 </script>
 {% endblock %}

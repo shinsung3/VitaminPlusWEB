@@ -1,24 +1,30 @@
 @charset "uft-8";
 @import url('https://fonts.googleapis.com/css?family=Bebas+Neue|Noto+Sans+KR&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
 
 * {
     box-sizing: border-box;
   }
   
   .strips {
-    min-height: 300px;
+    min-height: 150px;
     text-align: center;
     overflow: hidden;
-    color: white;
+    color: #666;
+    background-color: #f8b922;
   }
   .strips__strip {
     will-change: width, left, z-index, height;
     position: absolute;
     width: 20%;
-    min-height: 300px;
+    min-height: 150px;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    border-top: 5px solid;
+    border-bottom: 5px solid;
+    border-color: #f8b922;
+    font-family: "Black Han Sans";
   }
   .strips__strip:nth-child(1) {
     left: 0;
@@ -36,40 +42,50 @@
     left: 80vw;
   }
   .strips__strip:nth-child(1) .strip__content {
-    background: #f58484;
+    background: #fff;
     transform: translate3d(-100%, 0, 0);
+    border-left:5px solid #f8b922;
+    border-right:2px solid #f8b922;
     -webkit-animation-name: strip1;
             animation-name: strip1;
     -webkit-animation-delay: 0.1s;
             animation-delay: 0.1s;
   }
   .strips__strip:nth-child(2) .strip__content {
-    background: #fa9595;
+    background: #fff;
     transform: translate3d(0, 100%, 0);
+    border-left:2px solid #f8b922;
+    border-right:2px solid #f8b922;
     -webkit-animation-name: strip2;
             animation-name: strip2;
     -webkit-animation-delay: 0.2s;
             animation-delay: 0.2s;
   }
   .strips__strip:nth-child(3) .strip__content {
-    background: #f7a6a6;
+    background: #fff;
     transform: translate3d(0, -100%, 0);
+    border-left:2px solid #f8b922;
+    border-right:2px solid #f8b922;
     -webkit-animation-name: strip3;
             animation-name: strip3;
     -webkit-animation-delay: 0.3s;
             animation-delay: 0.3s;
   }
   .strips__strip:nth-child(4) .strip__content {
-    background: #f7adad;
+    background: #fff;
     transform: translate3d(0, 100%, 0);
+    border-left:2px solid #f8b922;
+    border-right:2px solid #f8b922;
     -webkit-animation-name: strip4;
             animation-name: strip4;
     -webkit-animation-delay: 0.4s;
             animation-delay: 0.4s;
   }
   .strips__strip:nth-child(5) .strip__content {
-    background: #fdc1c1;
+    background: #fff;
     transform: translate3d(100%, 0, 0);
+    border-left:2px solid #f8b922;
+    border-right:5px solid #f8b922;
     -webkit-animation-name: strip5;
             animation-name: strip5;
     -webkit-animation-delay: 0.5s;
@@ -134,7 +150,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: white;
+    background-color: #f8b922;
     opacity: 0.05;
     transform-origin: center center;
     transform: skew(-30deg) scaleY(1) translate(0, 0);
@@ -181,8 +197,8 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    font-size: 3.5vw;
-    color: white;
+    font-size: 40px;
+    color: #666;
     transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   }
   @media screen and (max-width: 760px) {
@@ -288,7 +304,6 @@
   }
   /* Demo purposes */
   body {
-    font-family: "Lato";
     -webkit-font-smoothing: antialiased;
     text-rendering: geometricPrecision;
     line-height: 1.5;
@@ -301,7 +316,7 @@
   
   .fa {
     font-size: 30px;
-    color: white;
+    color: #f8b922;
   }
   
   h2 {

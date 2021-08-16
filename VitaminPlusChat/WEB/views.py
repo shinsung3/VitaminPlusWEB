@@ -5,6 +5,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import ChatData
+from .templates.keyword.wordranking import make_top_word_graph
 
 def index_home(request):
     chatData = ChatData.objects.filter()
@@ -30,7 +31,9 @@ def index_home(request):
     return render(request, 'frontend/home.html', {'chat': chatData, 'timeLine':timeLine})
 
 def keyword(request):
-    return render(request, 'keyword/keyword.html')
+    wordList = make_top_word_graph('Okt0.txt', 5)
+
+    return render(request, 'keyword/keyword.html', {'word': wordList})
 
 def emotion(request):
     return render(request, 'frontend/emotion.html')
