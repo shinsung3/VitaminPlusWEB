@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\tlstj\OneDrive\문서\VitaminPlus\vitaminChat"
+VIRTUAL_ENV="C:\Users\tlstj\OneDrive\문서\VitaminPlusWEB2\vitaminChat"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
