@@ -4,8 +4,8 @@
 
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
-from .models import ChatData
 from .templates.keyword.wordranking import make_top_word_graph
+from .models import ChatData, KeywordData
 
 def index_home(request):
     chatData = ChatData.objects.filter()
@@ -36,7 +36,13 @@ def keyword(request):
     return render(request, 'keyword/keyword.html', {'word': wordList})
 
 def emotion(request):
-    return render(request, 'frontend/emotion.html')
+    emotion = ["슬리피", "자켓", "미진", "블루", "방송", "모델", "대박", "핏", "착용", "모자"]
+    value = [79, 45, 37,37,31,31,30,30,29,27]
+    bad = ["박재범", "끝", "개"]
+    good = ["라이브", "진짜", "쿠폰", "오", "로열"]
+    print(emotion)
+    print(value)
+    return render(request, 'frontend/emotion.html', {"emotion":emotion, "value":value, "bad":bad, "good":good})
 
 def timeline(request):
     chatData = ChatData.objects.filter()

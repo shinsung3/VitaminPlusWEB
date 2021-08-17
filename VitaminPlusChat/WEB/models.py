@@ -14,3 +14,7 @@ class ChatData(models.Model):
     userName = models.CharField(max_length=200, null=True)
     userNick = models.CharField(max_length=200, null=True)
     phone = models.IntegerField(null=True)
+
+class KeywordData(models.Model):
+    list = models.CharField(max_length=200, null=True)
+    value = models.IntegerField(null=True)

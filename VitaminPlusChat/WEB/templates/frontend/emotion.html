@@ -26,21 +26,34 @@
         <ul class="newsList">
             <li><a href="#">
                 <span class="category">긍정 <br>단어</span>
-                <span class="subject"></span>
+                <span class="subject">{% for g in good %}
+                    {{g}}
+                {% endfor %}
+                </span>
                 <span class="date en">LIVE: 2021.01.20</span>
                 <span class="desc"></span>
             </a></li>
             <li><a href="#">
                 <span class="category">부정 <br>단어</span>
-                <span class="subject"></span>
+                <span class="subject">{% for b in bad %}
+                    {{b}}
+                {% endfor %}</span>
                 <span class="date en">LIVE:2020.01.02</span>
                 <span class="desc"></span>
             </a></li>
             <li><a href="#">
                 <span class="category">HOT <br>키워드</span>
-                <span class="subject"></span>
+                <span class="subject">
+                    {% for e in emotion %}
+                        {{e}}
+                    {% endfor %}
+                </span>
                 <span class="date en">LIVE:2019.12.23</span>
-                <span class="desc"></span>
+                <span class="desc">
+                    빈도수 : {% for v in value %}
+                    {{v}}
+                    {% endfor %}
+                </span>
             </a></li>
         </ul>
     </div>
