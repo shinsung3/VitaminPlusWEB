@@ -160,7 +160,7 @@
     will-change: transform, opacity;
     position: absolute;
     z-index: 5;
-    top: 50%;
+    top: 220px;
     left: 50%;
     width: 70%;
     transform: translate(-50%, -50%) scale(0.5);
@@ -173,6 +173,9 @@
     left: 0 !important;
     z-index: 3;
     cursor: default;
+    overflow:scroll;
+    overflow-x:hidden;
+    background-color: #fff;
   }
   @media screen and (max-width: 760px) {
     .strips__strip--expanded {
